@@ -1,0 +1,42 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 10rem;
+    background-color:#212121;
+    padding: 1rem 10rem;
+}
+
+.header h1 {
+    color: #fff;
+}
+
+.header ul {
+    list-style: none;
+}
+
+.headerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #19cbaf;
+    border: 1px solid #19cbaf;
+    background-color: #212121;
+    padding: 0.4rem 3rem;
+    border-radius: 10px;
+}
+
+.headerQuantity {
+    color: black;
+    text-align: center;
+    padding: 0.4rem 2rem;
+    background-color: #19cbaf;
+    border-radius: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.headerBtn:hover {
+    transition: 0.5s;
+    background-color: #fff;
+}
