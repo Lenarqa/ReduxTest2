@@ -1,0 +1,53 @@
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background-color: #4d4d4d;
+  padding: 1rem;
+}
+
+.name {
+  margin-bottom: 1rem;
+}
+
+.itemDescription span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cost {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cost h2 {
+  margin-right: 5px;
+}
+
+.cost span {
+    font-style: italic;
+}
+
+.itemActions {
+    display: flex;
+    justify-content: end;
+}
+
+.itemActions button {
+    cursor: pointer;
+    color: #fff;
+    font-weight: 700;
+    border: 1px solid black;
+    background-color: #4d4d4d;
+    padding: 0.5rem 1rem;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.itemActions button:hover {
+    transition: 0.5s;
+    background-color: #292828;
+}

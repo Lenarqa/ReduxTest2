@@ -16,6 +16,7 @@
 }
 
 .headerBtn {
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -33,7 +34,6 @@
     background-color: #19cbaf;
     border-radius: 20px;
     margin-left: 10px;
-    cursor: pointer;
 }
 
 .headerBtn:hover {
