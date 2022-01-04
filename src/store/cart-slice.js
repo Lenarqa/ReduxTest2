@@ -1,20 +1,24 @@
 import { createSlice, createStore } from "@reduxjs/toolkit";
-import { enableES5 } from "immer";
-import uiActions from "./ui-slice";
 
 const inicialCartStore = {
   items: [],
   totalQuantity: 0,
+  changed: false,
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: inicialCartStore,
   reducers: {
+    replaceCart(state, action) {
+      state.items = action.payload.items;
+      state.totalQuantity = action.payload.totalQuantity;
+    },
     addItem(state, action) {
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
       state.totalQuantity++;
+      state.changed = true;
       if (!existingItem) {
         state.items.push({
           id: newItem.id,
@@ -25,34 +29,23 @@ const cartSlice = createSlice({
         });
       } else {
         existingItem.quantity++;
-        existingItem.totalPrice += newItem.price; 
+        existingItem.totalPrice += newItem.price;
       }
     },
     removeItem(state, action) {
-        const id = action.payload;
-        const existingItem = state.items.find(item => item.id === id);
-        state.totalQuantity--;
-        if(existingItem.quantity === 1) {
-            state.items = state.items.filter(item => item.id !== id);
-        }else{
-            existingItem.quantity--;
-            existingItem.totalPrice = existingItem.price * existingItem.quantity;
-        }
+      const id = action.payload;
+      const existingItem = state.items.find((item) => item.id === id);
+      state.totalQuantity--;
+      state.changed = true;
+      if (existingItem.quantity === 1) {
+        state.items = state.items.filter((item) => item.id !== id);
+      } else {
+        existingItem.quantity--;
+        existingItem.totalPrice = existingItem.price * existingItem.quantity;
+      }
     },
   },
 });
-
-const sendCartData = (cartData) => {
-    return (dispatch)=> {
-      dispatch(
-        uiActions.showNotification({
-          status: "pending",
-          title: "Senging",
-          message: "Sending cart data",
-        })
-      )
-    }
-  }
 
 export const cartActions = cartSlice.actions;
 
