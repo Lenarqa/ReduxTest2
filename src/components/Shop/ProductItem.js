@@ -5,11 +5,11 @@ const ProductItem = (props) => {
   return (
     <div className={classes.productItem}>
       <div className={classes.description}>
-        <h2>Test</h2>
-        <p>This is a first product - amazing</p>
+        <h2>{props.title}</h2>
+        <p>{props.description}</p>
       </div>
       <div className={classes.descriptionActions}>
-        <span className={classes.price}>$6.00</span>
+        <span className={classes.price}>${props.price}</span>
         <button>Add to Cart</button>
       </div>
     </div>
@@ -17,3 +17,4 @@ const ProductItem = (props) => {
 };
 
 export default ProductItem;
+
