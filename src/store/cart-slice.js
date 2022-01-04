@@ -1,18 +1,20 @@
 import { createSlice, createStore } from "@reduxjs/toolkit";
 import { enableES5 } from "immer";
+import uiActions from "./ui-slice";
 
 const inicialCartStore = {
-  items: {},
+  items: [],
   totalQuantity: 0,
 };
 
 const cartSlice = createSlice({
   name: "cart",
-  store: inicialCartStore,
+  initialState: inicialCartStore,
   reducers: {
     addItem(state, action) {
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
+      state.totalQuantity++;
       if (!existingItem) {
         state.items.push({
           id: newItem.id,
@@ -28,9 +30,10 @@ const cartSlice = createSlice({
     },
     removeItem(state, action) {
         const id = action.payload;
-        const existingItem = state.items.find(item => item === id);
+        const existingItem = state.items.find(item => item.id === id);
+        state.totalQuantity--;
         if(existingItem.quantity === 1) {
-            state.items = state.item.filter(item => item.id !== id);
+            state.items = state.items.filter(item => item.id !== id);
         }else{
             existingItem.quantity--;
             existingItem.totalPrice = existingItem.price * existingItem.quantity;
@@ -39,6 +42,18 @@ const cartSlice = createSlice({
   },
 });
 
+const sendCartData = (cartData) => {
+    return (dispatch)=> {
+      dispatch(
+        uiActions.showNotification({
+          status: "pending",
+          title: "Senging",
+          message: "Sending cart data",
+        })
+      )
+    }
+  }
+
 export const cartActions = cartSlice.actions;
 
-export default cartSlice.reducer;
+export default cartSlice;
